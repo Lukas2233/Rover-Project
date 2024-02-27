@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ROVER COMMAND CENTER</title>
+    <style>
+        /* Style the container for the D-pad */
+        .d-pad-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            flex-direction: column;
+        }
+
+        /* Style the rows in the D-pad */
+        .d-pad-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        /* Style the buttons in the D-pad */
+        .d-pad-button {
+            width: 70px;
+            height: 70px;
+            font-size: 18px;
+            margin: 5px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            background-color: blue; /* Updated background color */
+            color: #fff; /* Updated text color */
+            cursor: pointer;
+        }
+
+        /* Style the message div */
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        /* Updated page background color */
+        body {
+            background-color: darkgray;
+        }
+
+        /* Updated font for the title */
+        h1 {
+            font-family: sans-serif;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            /* Adjust button size for smaller screens */
+            .d-pad-button {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            /* Adjust button size and container margin for even smaller screens */
+            .d-pad-container {
+                margin-top: 10px;
+            }
+
+            .d-pad-button {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+        }
+    </style>
+    <script>
+        function sendCommand(command) {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+            
+            // Define the callback function
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Update the message div with the response text
+                    document.getElementById("message").innerText = xhr.responseText;
+                }
+            };
+            
+            // Open a new asynchronous GET request to the specified route
+            xhr.open("GET", "/send_command/" + command, true);
+            
+            // Send the request
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">ROVER COMMAND CENTER</h1>
+    <!-- Use JavaScript to call the sendCommand function on button click -->
+    <div class="d-pad-container">
+        <!-- First row of buttons -->
+        <div class="d-pad-row">
+            <button class="d-pad-button" onclick="sendCommand('w')">↑</button>
+        </div>
+        <!-- Second row of buttons -->
+        <div class="d-pad-row">
+            <button class="d-pad-button" onclick="sendCommand('a')">←</button>
+            <button class="d-pad-button" onclick="sendCommand('q')">Stop</button>
+            <button class="d-pad-button" onclick="sendCommand('d')">→</button>
+        </div>
+        <!-- Third row of buttons -->
+        <div class="d-pad-row">
+            <button class="d-pad-button" onclick="sendCommand('s')">↓</button>
+        </div>
+    </div>
+    <!-- Display the message here -->
+    <div id="message"></div>
+</body>
+</html>
