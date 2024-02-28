@@ -24,11 +24,12 @@
             height: 150px; /* Updated button height */
             font-size: 18px;
             margin: 5px;
-            border: 2px solid #333;
+            border: none; /* Removed border */
             border-radius: 0;
-            background-color: blue; /* Updated background color */
+            background-color: transparent; /* Updated background color */
             color: #fff; /* Updated text color */
             cursor: pointer;
+            padding: 0; /* Removed padding */
         }
 
         /* Style the message div */
@@ -39,7 +40,7 @@
 
         /* Updated page background color */
         body {
-            background-color: darkgray;
+            background-color: rgb(39, 39, 39);
         }
 
         /* Updated font for the title */
@@ -92,22 +93,34 @@
     </script>
 </head>
 <body>
-    <h1 style="text-align: center;">ROVER COMMAND CENTER</h1>
+    <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
+        <h1 style="text-align: center; color: white;">ROVER COMMAND CENTER</h1>
+    </div>
     <!-- Use JavaScript to call the sendCommand function on button click -->
     <div class="d-pad-container">
         <!-- First row of buttons -->
         <div class="d-pad-row">
-            <button class="d-pad-button" onclick="sendCommand('w')">↑</button>
-        </div>
-        <!-- Second row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onclick="sendCommand('a')">←</button>
-            <button class="d-pad-button" onclick="sendCommand('q')">Stop</button>
-            <button class="d-pad-button" onclick="sendCommand('d')">→</button>
-        </div>
-        <!-- Third row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onclick="sendCommand('s')">↓</button>
+            <button class="d-pad-button" onclick="sendCommand('w')">
+                        <img src="Buttons/forward.png" alt="Forward" width="150" />
+                    </button>
+                </div>
+                <!-- Second row of buttons -->
+                <div class="d-pad-row">
+                    <button class="d-pad-button" onclick="sendCommand('a')">
+                        <img src="Buttons/forward.png" alt="Left" width="150" />
+                    </button>
+                    <button class="d-pad-button" onclick="sendCommand('q')">
+                        <img src="Buttons/forward.png" alt="Stop" width="150" />
+                    </button>
+                    <button class="d-pad-button" onclick="sendCommand('d')">
+                        <img src="Buttons/forward.png" alt="Right" width="150" />
+                    </button>
+                </div>
+                <!-- Third row of buttons -->
+                <div class="d-pad-row">
+                    <button class="d-pad-button" onclick="sendCommand('s')">
+                        <img src="Buttons/forward.png" alt="Backward" width="150" />
+            </button>
         </div>
     </div>
     <!-- Display the message here -->
