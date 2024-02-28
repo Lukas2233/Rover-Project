@@ -1,10 +1,14 @@
 #include <util/atomic.h> // For the ATOMIC_BLOCK macro
+#include <Servo.h>
 
 #define ENCA 2 // YELLOW
 #define ENCB 3 // GREEN
 #define PWM 8
 #define IN2 24
 #define IN1 22
+
+Servo servo1;
+
 
 volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
 long prevT = 0;
@@ -21,6 +25,8 @@ void setup() {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   
+ servo1.attach(36);
+
   Serial.println("target pos");
 }
 
@@ -120,13 +126,13 @@ void stopMotor() {
 }
 
 void turnRight() {
-  // Implement turn right logic
-  // For example, you can adjust motor settings to turn right
+servo1.write(120);
+delay(15);
 }
 
 void turnLeft() {
-  // Implement turn left logic
-  // For example, you can adjust motor settings to turn left
+servo1.write(20);
+delay(15);
 }
 
 void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
