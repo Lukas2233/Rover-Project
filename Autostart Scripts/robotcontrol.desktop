@@ -1,3 +1,3 @@
 [Desktop Entry]
 
-Exec=sudo bash /home/lukas/on_reboot.sh
+Exec=sudo bash /home/lukas/Rover-Project/on_reboot.sh
