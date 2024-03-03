@@ -26,6 +26,22 @@ def command_checker():
             send_command('d')
         elif keyboard.is_pressed('a'):
             send_command('a')
+        elif keyboard.is_pressed('e'):
+            send_command('e')
+        elif keyboard.is_pressed('r'):
+            send_command('r')
+        elif keyboard.is_pressed('f'):
+            send_command('f')
+        elif keyboard.is_pressed('u'):
+            send_command('u')
+        elif keyboard.is_pressed('o'):
+            send_command('o')
+        elif keyboard.is_pressed('j'):
+            send_command('j')
+        elif keyboard.is_pressed('k'):
+            send_command('k')
+        elif keyboard.is_pressed('l'):
+            send_command('l')
 
 
 # Start the background thread
