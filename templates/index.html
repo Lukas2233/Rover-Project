@@ -3,42 +3,6 @@
 <head> 
     <title>ROVER COMMAND CENTER</title>
     <style>
-        /* Style the container for the D-pad */
-        .d-pad-container {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            flex-direction: column;
-        }
-
-        /* Style the rows in the D-pad */
-        .d-pad-row {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        /* Style the buttons in the D-pad */
-        .d-pad-button {
-            width: 150px; /* Updated button width */
-            height: 150px; /* Updated button height */
-            font-size: 18px;
-            margin: 5px;
-            border: none; /* Removed border */
-            border-radius: 0;
-            background-color: transparent; /* Updated background color */
-            color: #fff; /* Updated text color */
-            cursor: pointer;
-            padding: 0; /* Removed padding */
-        }
-
-        /* Style the message div */
-        #message {
-            margin-top: 20px;
-            font-size: 18px;
-            color: red
-        }
-
         /* Updated page background color */
         body {
             background-color: rgb(39, 39, 39);
@@ -49,32 +13,40 @@
             font-family: sans-serif;
         }
 
-        /* Responsive styles */
-        @media (max-width: 600px) {
-            /* Adjust button size for smaller screens */
-            .d-pad-button {
-                width: 120px;
-                height: 120px;
-                font-size: 14px;
-            }
+        /* Make the image responsive */
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
-        @media (max-width: 400px) {
-            /* Adjust button size and container margin for even smaller screens */
-            .d-pad-container {
-                margin-top: 10px;
-            }
+        /* Make the webcam feed responsive and centered */
+        #camera-feed {
+            max-width: 950px;
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid red;
+            margin: 0 auto;
+        }
 
-            .d-pad-button {
-                width: 90px;
-                height: 90px;
-                font-size: 12px;
-            }
+        /* Scale the keyboard layout image and center it */
+        #keyboard-layout {
+            max-width: 950px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
     </style>
+
     <script>
         document.addEventListener('keydown', function(event) {
             var key = event.key;
+            if (key === ' ') {
+                key = 'q';
+            }
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/send_command/' + key, true);
             xhr.send();
@@ -85,34 +57,17 @@
     <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
         <h1 style="text-align: center; color: white;">ROVER COMMAND CENTER</h1>
     </div>
-    <!-- Use JavaScript to call the sendCommand function on button click -->
-    <div class="d-pad-container">
-        <!-- First row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 'w'" onmouseup="command = 'q'">
-                <img src="../static/img/forward.png" alt="Forward" width="150" />
-            </button>
-        </div>
-        <!-- Second row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 'a'" onmouseup="command = 'q'">
-                <img src="../static/img/bigleft.png" alt="Left" width="150" />
-            </button>
-            <button class="d-pad-button" onclick="command = 'q'">
-                <img src="../static/img/stop.png" alt="Stop" width="150" />
-            </button>
-            <button class="d-pad-button" onmousedown="command = 'd'" onmouseup="command = 'q'">
-                <img src="../static/img/bigright.png" alt="Right" width="150" />
-            </button>
-        </div>
-        <!-- Third row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 's'" onmouseup="command = 'q'">
-                <img src="../static/img/reverse.png" alt="Backward" width="150" />
-            </button>
-        </div>
+    <div id="camera-feed">
+        <!-- Webcam feed will be displayed here -->
     </div>
-    <!-- Display the message here -->
-    <div id="message" style="text-align: center;"></div>
+    <script src="../static/js/script.js"></script>
+    <script>
+        // Run displayWebcamFeed function when the page is loaded
+        window.onload = function() {
+            displayWebcamFeed();
+        };
+    </script>
+    <img id="keyboard-layout" src="../static/img/Keyboard Layout.png" alt="Description of the image">
+
 </body>
 </html>
