@@ -26,8 +26,7 @@ def command_checker():
             send_command('d')
         elif keyboard.is_pressed('a'):
             send_command('a')
-        elif keyboard.is_pressed('h'):
-            send_command('h')
+
 
 # Start the background thread
 thread = threading.Thread(target=command_checker)
