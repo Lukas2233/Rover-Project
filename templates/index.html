@@ -39,6 +39,22 @@
             display: block;
             margin: 0 auto;
         }
+
+        /* Center the buttons and arrange them in a grid */
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 
 <script>
@@ -74,6 +90,39 @@
             displayWebcamFeed();
         };
     </script>
+    <div class="button-container</div>"></div>
+     
+<!--Top row left grid-->>
+    <div class="button">
+            <a href="#" onclick="sendCommand('q')">
+                <img src="../static/img/rotateleft.png" alt="rotateleft">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('w')">
+                <img src="../static/img/forward.png" alt="forward">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('e')">
+                <img src="../static/img/rotateright.png" alt="rotateright">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('r')">
+                <img src="../static/img/diagonalright.png" alt="diagonalright">
+            </a>
+        </div>
+
+<!--Top row right grid-->>
+<div class="button">
+    <a href="#" onclick="sendCommand('u')">
+        <img src="../static/img/smallleft.png" alt="smallleft">
+    </a>
+</div>
 
 <div class="button">
     <a href="#" onclick="sendCommand('k')">
@@ -82,23 +131,31 @@
 </div>
 
 <div class="button">
-    <a href="#" onclick="sendCommand('w')">
-        <img src="../static/img/forward.png" alt="forward">
+    <a href="#" onclick="sendCommand('e')">
+        <img src="../static/img/smallright.png" alt="smallright">
     </a>
 </div>
 
-<div class="button">
-    <a href="#" onclick="sendCommand('s')">
-        <img src="../static/img/reverse.png" alt="reverse">
-    </a>
-</div>
 
-<div class="button">
-    <a href="#" onclick="sendCommand('q')">
-        <img src="../static/img/stop.png" alt="stop">
-    </a>
-</div>
+
+
+
+
+
+<!--Bottom row center grid-->>
+
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('q')">
+                <img src="../static/img/stop.png" alt="stop">
+            </a>
+        </div>
+
+
+
+
+
+    </div>
 
 </body>
 </html>
-</button>
