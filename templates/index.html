@@ -19,14 +19,25 @@
             height: auto;
         }
 
-        /* Make the webcam feed responsive */
+        /* Make the webcam feed responsive and centered */
         #camera-feed {
-            max-width: 100%;
+            max-width: 950px;
+            width: 100%;
             height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
             border: 2px solid red;
+            margin: 0 auto;
+        }
+
+        /* Scale the keyboard layout image and center it */
+        #keyboard-layout {
+            max-width: 950px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 
@@ -56,7 +67,7 @@
             displayWebcamFeed();
         };
     </script>
-    <img src="../static/img/Keyboard Layout.png" alt="Description of the image">
+    <img id="keyboard-layout" src="../static/img/Keyboard Layout.png" alt="Description of the image">
 
 </body>
 </html>
