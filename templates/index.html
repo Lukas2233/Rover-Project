@@ -96,6 +96,8 @@
 
         // Event listeners for keydown and keyup events
         document.addEventListener('keydown', function(event) {
+            if (event.repeat) return; // Ignore repeated keydown events
+            
             switch(event.key) {
                 case 'w':
                     command = 'w';
@@ -114,9 +116,14 @@
         });
 
         document.addEventListener('keyup', function(event) {
+            if (event.repeat) return; // Ignore repeated keyup events
+            
             command = 'q'; // Set command to 'q' (stop) when no keys are being pressed
             sendCommand();
         });
+        
+        // Send 'q' command initially
+        sendCommand();
     </script>
 </head>
 <body>
