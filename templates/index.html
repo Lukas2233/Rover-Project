@@ -36,7 +36,16 @@
     <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
         <h1 style="text-align: center; color: white;">ROVER COMMAND CENTER</h1>
     </div>
-
+    <div id="camera-feed">
+        <!-- Webcam feed will be displayed here -->
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Run displayWebcamFeed function when the page is loaded
+        window.onload = function() {
+            displayWebcamFeed();
+        };
+    </script>
     <img src="../static/img/Keyboard Layout.png" alt="Description of the image">
 
 </body>
