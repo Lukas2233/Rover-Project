@@ -3,42 +3,6 @@
 <head> 
     <title>ROVER COMMAND CENTER</title>
     <style>
-        /* Style the container for the D-pad */
-        .d-pad-container {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            flex-direction: row; /* Updated flex-direction to row */
-        }
-
-        /* Style the rows in the D-pad */
-        .d-pad-row {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        /* Style the buttons in the D-pad */
-        .d-pad-button {
-            width: 150px; /* Updated button width */
-            height: 150px; /* Updated button height */
-            font-size: 18px;
-            margin: 5px;
-            border: none; /* Removed border */
-            border-radius: 0;
-            background-color: transparent; /* Updated background color */
-            color: #fff; /* Updated text color */
-            cursor: pointer;
-            padding: 0; /* Removed padding */
-        }
-
-        /* Style the message div */
-        #message {
-            margin-top: 20px;
-            font-size: 18px;
-            color: red
-        }
-
         /* Updated page background color */
         body {
             background-color: rgb(39, 39, 39);
@@ -48,30 +12,8 @@
         h1 {
             font-family: sans-serif;
         }
-
-        /* Responsive styles */
-        @media (max-width: 600px) {
-            /* Adjust button size for smaller screens */
-            .d-pad-button {
-                width: 120px;
-                height: 120px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            /* Adjust button size and container margin for even smaller screens */
-            .d-pad-container {
-                margin-top: 10px;
-            }
-
-            .d-pad-button {
-                width: 90px;
-                height: 90px;
-                font-size: 12px;
-            }
-        }
     </style>
+
     <script>
         document.addEventListener('keydown', function(event) {
             var key = event.key;
@@ -85,7 +27,5 @@
     <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
         <h1 style="text-align: center; color: white;">ROVER COMMAND CENTER</h1>
     </div>
-    <!-- Display the message here -->
-    <div id="message" style="text-align: center;"></div>
 </body>
 </html>
