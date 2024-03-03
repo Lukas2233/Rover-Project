@@ -31,6 +31,18 @@
             margin: 0 auto;
         }
 
+        /*create large container around all buttons*/
+        .button-master-container {
+            display: grid;
+            grid-template-columns: repeat(1, 2fr);
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            background-image: url("../static/img/buttonbackground.png");
+            background-size: cover;
+            background-position: center;
+            height: 250px; /* Set height to cover the entire viewport */
+        }
 
         /* Center the buttons and arrange them in a grid */
         .button-container {
@@ -40,10 +52,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-            background-image: url("../static/img/buttonbackground.png");
-            background-size: cover;
-            background-position: center;
-            height: 250px; /* Set height to cover the entire viewport */
+
 
         }
 
@@ -88,6 +97,8 @@
         };
     </script>
 
+<!--master container-->
+<div class="button-master-container">
 <!--grid container -->
     <div class="button-container">
 <!--Top row left grid-->
@@ -190,6 +201,7 @@
     <a href="#" onclick="sendCommand('q')">
         <img src="../static/img/stop.png" alt="stop">
     </a>
+</div>
 </div>
 
 </body>
