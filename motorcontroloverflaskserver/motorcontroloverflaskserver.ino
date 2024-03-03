@@ -78,12 +78,12 @@ void stopMotor() {
 }
 
 void turnRight() {
-servo1.write(120);
+servo1.write(180);
 delay(15);
 }
 
 void turnLeft() {
-servo1.write(20);
+servo1.write(0);
 delay(15);
 }
 
