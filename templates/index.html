@@ -8,7 +8,7 @@
             display: flex;
             align-items: center;
             margin-top: 20px;
-            flex-direction: column;
+            flex-direction: row; /* Updated flex-direction to row */
         }
 
         /* Style the rows in the D-pad */
@@ -84,33 +84,6 @@
 <body>
     <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
         <h1 style="text-align: center; color: white;">ROVER COMMAND CENTER</h1>
-    </div>
-    <!-- Use JavaScript to call the sendCommand function on button click -->
-    <div class="d-pad-container">
-        <!-- First row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 'w'" onmouseup="command = 'q'">
-                <img src="../static/img/forward.png" alt="Forward" width="150" />
-            </button>
-        </div>
-        <!-- Second row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 'a'" onmouseup="command = 'q'">
-                <img src="../static/img/bigleft.png" alt="Left" width="150" />
-            </button>
-            <button class="d-pad-button" onclick="command = 'q'">
-                <img src="../static/img/stop.png" alt="Stop" width="150" />
-            </button>
-            <button class="d-pad-button" onmousedown="command = 'd'" onmouseup="command = 'q'">
-                <img src="../static/img/bigright.png" alt="Right" width="150" />
-            </button>
-        </div>
-        <!-- Third row of buttons -->
-        <div class="d-pad-row">
-            <button class="d-pad-button" onmousedown="command = 's'" onmouseup="command = 'q'">
-                <img src="../static/img/reverse.png" alt="Backward" width="150" />
-            </button>
-        </div>
     </div>
     <!-- Display the message here -->
     <div id="message" style="text-align: center;"></div>
