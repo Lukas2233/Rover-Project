@@ -1,7 +1,7 @@
 // Function to fetch and display webcam feed
 function displayWebcamFeed() {
     // Endpoint URL for fetching webcam feed
-    const webcamFeedUrl = 'http://192.168.86.23:8080/'; // Replace with your actual RPI cam server address and port
+    const webcamFeedUrl = '	http://192.168.86.23:8080/html/cam_pic_new.php?time=1709478595111&pDelay=40000'; // Replace with your actual RPI cam server address and port
 
     // Select the div where you want to display the webcam feed
     const webcamFeedDiv = document.getElementById('camera-feed');
