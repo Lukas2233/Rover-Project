@@ -31,19 +31,11 @@
             margin: 0 auto;
         }
 
-        /* Scale the keyboard layout image and center it */
-        #keyboard-layout {
-            max-width: 950px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
 
         /* Center the buttons and arrange them in a grid */
         .button-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(7, 4fr);
             gap: 10px;
             justify-content: center;
             align-items: center;
@@ -90,9 +82,10 @@
             displayWebcamFeed();
         };
     </script>
-    <div class="button-container</div>"></div>
-     
-<!--Top row left grid-->>
+
+<!--grid container -->
+    <div class="button-container">
+<!--Top row left grid-->
     <div class="button">
             <a href="#" onclick="sendCommand('q')">
                 <img src="../static/img/rotateleft.png" alt="rotateleft">
@@ -117,7 +110,7 @@
             </a>
         </div>
 
-<!--Top row right grid-->>
+<!--Top row right grid-->
 <div class="button">
     <a href="#" onclick="sendCommand('u')">
         <img src="../static/img/smallleft.png" alt="smallleft">
@@ -136,13 +129,54 @@
     </a>
 </div>
 
+<!--Middle row left grid-->
+<div class="button">
+    <a href="#" onclick="sendCommand('a')">
+        <img src="../static/img/crableft.png" alt="crableft">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('s')">
+        <img src="../static/img/reverse.png" alt="reverse">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('d')">
+        <img src="../static/img/crabright.png" alt="crabright">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('f')">
+        <img src="../static/img/diagonalleft.png" alt="diagonalleft">
+    </a>
+</div>
+
+
+<!--Middle row right grid-->
+<div class="button">
+    <a href="#" onclick="sendCommand('j')">
+        <img src="../static/img/bigleft.png" alt="bigleft">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('k')">
+        <img src="../static/img/center.png" alt="center">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('l')">
+        <img src="../static/img/bigright.png" alt="bigright">
+    </a>
+</div>
 
 
 
-
-
-
-<!--Bottom row center grid-->>
+<!--Bottom row center grid-->
 
 
         <div class="button">
