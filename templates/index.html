@@ -73,24 +73,12 @@
         }
     </style>
     <script>
-        function sendCommand(command) {
-            // Create a new XMLHttpRequest object
+        document.addEventListener('keydown', function(event) {
+            var key = event.key;
             var xhr = new XMLHttpRequest();
-            
-            // Define the callback function
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Update the message div with the response text
-                    document.getElementById("message").innerText = xhr.responseText;
-                }
-            };
-            
-            // Open a new asynchronous GET request to the specified route
-            xhr.open("GET", "/send_command/" + command, true);
-            
-            // Send the request
+            xhr.open('GET', '/send_command/' + key, true);
             xhr.send();
-        }
+        });
     </script>
 </head>
 <body>
@@ -101,26 +89,26 @@
     <div class="d-pad-container">
         <!-- First row of buttons -->
         <div class="d-pad-row">
-            <button class="d-pad-button" onclick="sendCommand('w')">
-                        <img src="../static/img/forward.png" alt="Forward" width="150" />
-                    </button>
-                </div>
-                <!-- Second row of buttons -->
-                <div class="d-pad-row">
-                    <button class="d-pad-button" onclick="sendCommand('a')">
-                        <img src="../static/img/bigleft.png" alt="Left" width="150" />
-                    </button>
-                    <button class="d-pad-button" onclick="sendCommand('q')">
-                        <img src="../static/img/stop.png" alt="Stop" width="150" />
-                    </button>
-                    <button class="d-pad-button" onclick="sendCommand('d')">
-                        <img src="../static/img/bigright.png" alt="Right" width="150" />
-                    </button>
-                </div>
-                <!-- Third row of buttons -->
-                <div class="d-pad-row">
-                    <button class="d-pad-button" onclick="sendCommand('s')">
-                        <img src="../static/img/reverse.png" alt="Backward" width="150" />
+            <button class="d-pad-button" onmousedown="command = 'w'" onmouseup="command = 'q'">
+                <img src="../static/img/forward.png" alt="Forward" width="150" />
+            </button>
+        </div>
+        <!-- Second row of buttons -->
+        <div class="d-pad-row">
+            <button class="d-pad-button" onmousedown="command = 'a'" onmouseup="command = 'q'">
+                <img src="../static/img/bigleft.png" alt="Left" width="150" />
+            </button>
+            <button class="d-pad-button" onclick="command = 'q'">
+                <img src="../static/img/stop.png" alt="Stop" width="150" />
+            </button>
+            <button class="d-pad-button" onmousedown="command = 'd'" onmouseup="command = 'q'">
+                <img src="../static/img/bigright.png" alt="Right" width="150" />
+            </button>
+        </div>
+        <!-- Third row of buttons -->
+        <div class="d-pad-row">
+            <button class="d-pad-button" onmousedown="command = 's'" onmouseup="command = 'q'">
+                <img src="../static/img/reverse.png" alt="Backward" width="150" />
             </button>
         </div>
     </div>
