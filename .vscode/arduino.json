@@ -1,6 +1,0 @@
-{
-    "configuration": "cpu=atmega2560",
-    "board": "arduino:avr:mega",
-    "programmer": "arduinoasispatmega32u4",
-    "port": "COM9"
-}
