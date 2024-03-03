@@ -17,6 +17,9 @@
     <script>
         document.addEventListener('keydown', function(event) {
             var key = event.key;
+            if (key === ' ') {
+                key = 'space';
+            }
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/send_command/' + key, true);
             xhr.send();
