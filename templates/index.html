@@ -73,57 +73,12 @@
         }
     </style>
     <script>
-        var command = 'q'; // Default command is 'q' (stop)
-
-        function sendCommand() {
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-            
-            // Define the callback function
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Update the message div with the response text
-                    document.getElementById("message").innerText = xhr.responseText;
-                }
-            };
-            
-            // Open a new asynchronous GET request to the specified route
-            xhr.open("GET", "/send_command/" + command, true);
-            
-            // Send the request
-            xhr.send();
-        }
-
-        // Event listeners for keydown and keyup events
         document.addEventListener('keydown', function(event) {
-            if (event.repeat) return; // Ignore repeated keydown events
-            
-            switch(event.key) {
-                case 'w':
-                    command = 'w';
-                    break;
-                case 'a':
-                    command = 'a';
-                    break;
-                case 's':
-                    command = 's';
-                    break;
-                case 'd':
-                    command = 'd';
-                    break;
-            }
-            sendCommand();
+            var key = event.key;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/send_command/' + key, true);
+            xhr.send();
         });
-
-        document.addEventListener('keyup', function(event) {
-            if (event.repeat) return; // Ignore repeated keyup events
-            
-            command = 'q'; // Set command to 'q' (stop) when no keys are being pressed
-            sendCommand();
-        });
-        
-        // Send 'q' command initially
-        sendCommand();
     </script>
 </head>
 <body>
