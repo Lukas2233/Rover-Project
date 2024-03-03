@@ -68,10 +68,11 @@
     </style>
 
 <script>
+    //this first section controsl for spacebar input
     document.addEventListener('keydown', function(event) {
         var key = event.key;
         if (key === ' ') {
-            key = 'q';
+            key = 'h';
         }
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/send_command/' + key, true);
