@@ -17,6 +17,7 @@
         img {
             max-width: 100%;
             height: auto;
+            cursor: pointer; /* Added cursor pointer */
         }
 
         /* Make the webcam feed responsive and centered */
@@ -49,6 +50,13 @@
             }
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/send_command/' + key, true);
+            xhr.send();
+        });
+
+        // Added click event listener to the keyboard layout image
+        document.getElementById('keyboard-layout').addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/send_command/w', true);
             xhr.send();
         });
     </script>
