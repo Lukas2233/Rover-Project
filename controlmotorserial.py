@@ -1,11 +1,23 @@
 from flask import Flask, render_template, request
 import serial
 import threading
+import glob
 
 app = Flask(__name__)
 
-# Define the serial port and baud rate
-ser = serial.Serial('/dev/ttyACM0', 9600)
+# Find all available serial ports
+ports = glob.glob('/dev/ttyACM*')
+
+# Iterate through each port and try to connect
+for port in ports:
+    try:
+        ser = serial.Serial(port, 9600)
+        break
+    except serial.SerialException:
+        pass
+else:
+    raise Exception("No Arduino found on any serial port")
+
 
 # Function to send command to Arduino
 def send_command(command):
