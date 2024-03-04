@@ -27,31 +27,65 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid red;
+            border: 2px solid rgb(179, 76, 76);
             margin: 0 auto;
         }
 
-        /* Scale the keyboard layout image and center it */
-        #keyboard-layout {
+        /*create large container around all buttons*/
+        .button-master-container {
+            display: grid;
+            grid-template-columns: repeat(1, 2fr);
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin:auto;
+            background-image: url("../static/img/buttonbackground.png");
+            background-size: cover;
+            background-position: center;
+            height: 250px; /* Set height to cover the entire viewport */
             max-width: 950px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
+            justify-items: center;
+        }
+
+        /* Center the buttons and arrange them in a grid */
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(7, 4fr);
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            max-width: 900px;
+
+
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 
-    <script>
-        document.addEventListener('keydown', function(event) {
-            var key = event.key;
-            if (key === ' ') {
-                key = 'q';
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/send_command/' + key, true);
-            xhr.send();
-        });
-    </script>
+<script>
+    //this first section controsl for spacebar input
+    document.addEventListener('keydown', function(event) {
+        var key = event.key;
+        if (key === ' ') {
+            key = 'h';
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/send_command/' + key, true);
+        xhr.send();
+    });
+
+    function sendCommand(command) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/send_command/' + command, true);
+        xhr.send();
+    }
+</script>
+
 </head>
 <body>
     <div style="background-color: rgb(26, 26, 26); height: 50px; display: flex; align-items: center; justify-content: center;">
@@ -67,7 +101,113 @@
             displayWebcamFeed();
         };
     </script>
-    <img id="keyboard-layout" src="../static/img/Keyboard Layout.png" alt="Description of the image">
+
+<!--master container-->
+<div class="button-master-container">
+<!--grid container -->
+    <div class="button-container">
+<!--Top row left grid-->
+    <div class="button">
+            <a href="#" onclick="sendCommand('q'); return false;">
+                <img src="../static/img/rotateleft.png" alt="rotateleft">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('w'); return false;">
+                <img src="../static/img/forward.png" alt="forward">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('e'); return false;">
+                <img src="../static/img/rotateright.png" alt="rotateright">
+            </a>
+        </div>
+
+        <div class="button">
+            <a href="#" onclick="sendCommand('r'); return false;">
+                <img src="../static/img/diagonalright.png" alt="diagonalright">
+            </a>
+        </div>
+
+<!--Top row right grid-->
+<div class="button">
+    <a href="#" onclick="sendCommand('u'); return false;">
+        <img src="../static/img/smallleft.png" alt="smallleft">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('k'); return false;">
+        <img src="../static/img/center.png" alt="center">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('e'); return false;">
+        <img src="../static/img/smallright.png" alt="smallright">
+    </a>
+</div>
+
+<!--Middle row left grid-->
+<div class="button">
+    <a href="#" onclick="sendCommand('a'); return false;">
+        <img src="../static/img/crableft.png" alt="crableft">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('s'); return false;">
+        <img src="../static/img/reverse.png" alt="reverse">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('d'); return false;">
+        <img src="../static/img/crabright.png" alt="crabright">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('f'); return false;">
+        <img src="../static/img/diagonalleft.png" alt="diagonalleft">
+    </a>
+</div>
+
+
+<!--Middle row right grid-->
+<div class="button">
+    <a href="#" onclick="sendCommand('j'); return false;">
+        <img src="../static/img/bigleft.png" alt="bigleft">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('k'); return false;">
+        <img src="../static/img/center.png" alt="center">
+    </a>
+</div>
+
+<div class="button">
+    <a href="#" onclick="sendCommand('l'); return false;">
+        <img src="../static/img/bigright.png" alt="bigright">
+    </a>
+</div>
+
+
+
+    </div>
+
+<!--Bottom row center grid-->
+
+
+<div class="button">
+    <a href="#" onclick="sendCommand('h'); return false;">
+        <img src="../static/img/stop.png" alt="stop">
+    </a>
+</div>
+</div>
 
 </body>
 </html>

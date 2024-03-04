@@ -43,27 +43,29 @@ void loop() {
     else if (incomingByte == 's') {
       counterClockwise();
     }
-    // If the incoming byte is 'q', stop the motor
-    else if (incomingByte == 'q') {
+    // If the incoming byte is 'h', stop the motor
+    else if (incomingByte == 'h') {
       stopMotor();
     }
-    // If the incoming byte is 'd', turn right
-    else if (incomingByte == 'd') {
+    // If the incoming byte is 'd', turn right 45 degrees
+    else if (incomingByte == 'l') {
       turnRight();
     }
-    // If the incoming byte is 'a', turn left
-    else if (incomingByte == 'a') {
+    // If the incoming byte is 'j', turn left 45 degrees
+    else if (incomingByte == 'j') {
       turnLeft();
+    }
+    // If the incoming byte is 'k', center
+    else if (incomingByte == 'k') {
+      center();
     }
   }
 }
-
 
 void clockwise() {
   // Set motor direction clockwise
   setMotor(1, 255, PWM, IN1, IN2);
 }
-
 
 void counterClockwise() {
   // Run the motor counter-clockwise
@@ -76,12 +78,17 @@ void stopMotor() {
 }
 
 void turnRight() {
-servo1.write(120);
+servo1.write(180);
 delay(15);
 }
 
 void turnLeft() {
-servo1.write(20);
+servo1.write(0);
+delay(15);
+}
+
+void center() {
+servo1.write(90);
 delay(15);
 }
 
