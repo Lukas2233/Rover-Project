@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Rovercontrol
+Exec=/usr/bin/python3 /home/lukas/Rover-Project/controlmotorserial.py
