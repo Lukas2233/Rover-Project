@@ -1,9 +1,7 @@
-#!/lukas/bin/env python3
+#!/usr/bin/env python3
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import serial
-import threading
-import keyboard  # Install using: pip install keyboard
 
 app = Flask(__name__)
  
@@ -14,48 +12,11 @@ ser = serial.Serial('/dev/ttyACM0', 9600)
 def send_command(command):
     ser.write(command.encode())
 
-# Background thread to continuously check for commands
-def command_checker():
-    while True:
-        # Read keyboard inputs continuously
-        if keyboard.is_pressed('w'):
-            send_command('w')
-        elif keyboard.is_pressed('s'):
-            send_command('s')
-        elif keyboard.is_pressed('q'):
-            send_command('q')
-        elif keyboard.is_pressed('d'):
-            send_command('d')
-        elif keyboard.is_pressed('a'):
-            send_command('a')
-        elif keyboard.is_pressed('e'):
-            send_command('e')
-        elif keyboard.is_pressed('r'):
-            send_command('r')
-        elif keyboard.is_pressed('f'):
-            send_command('f')
-        elif keyboard.is_pressed('u'):
-            send_command('u')
-        elif keyboard.is_pressed('o'):
-            send_command('o')
-        elif keyboard.is_pressed('j'):
-            send_command('j')
-        elif keyboard.is_pressed('k'):
-            send_command('k')
-        elif keyboard.is_pressed('l'):
-            send_command('l')
-
-
-# Start the background thread
-thread = threading.Thread(target=command_checker)
-thread.daemon = True
-thread.start()
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Define routes to handle commands
+# Define route to handle commands
 @app.route('/send_command/<command>')
 def handle_command(command):
     send_command(command)
