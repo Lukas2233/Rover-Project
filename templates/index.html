@@ -43,7 +43,7 @@
             background-size: cover;
             background-position: center;
             height: 250px; /* Set height to cover the entire viewport */
-            max-width: 950px;
+            max-width: 800px;
             justify-items: center;
         }
 
@@ -55,7 +55,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-            max-width: 900px;
+            max-width: 700px;
 
 
         }
@@ -65,6 +65,14 @@
             justify-content: center;
             align-items: center;
         }
+
+        .buttonspace {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 500px;
+            margin-top: 15px;
+        } 
     </style>
 
 <script>
@@ -201,7 +209,7 @@
 <!--Bottom row center grid-->
 
 
-<div class="button">
+<div class="buttonspace">
     <a href="#" onclick="sendCommand('h'); return false;">
         <img src="../static/img/stop.png" alt="stop">
     </a>
