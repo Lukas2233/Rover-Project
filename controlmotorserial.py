@@ -1,4 +1,4 @@
-#!/lukas/bin/env python3
+#!/usr/bin/env python3
 
 from flask import Flask, render_template
 import serial
