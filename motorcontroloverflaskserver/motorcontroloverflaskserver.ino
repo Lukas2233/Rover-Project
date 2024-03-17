@@ -26,22 +26,22 @@
 #define ENCA_FR 3 // Interrupt pin
 #define ENCB_FR 48
 #define PWM_FR 9
-#define IN2_FR 43
-#define IN1_FR 42
+#define IN2_FR 42
+#define IN1_FR 43
 
 // middle right motor
 #define ENCA_MR 18 // Interrupt pin
 #define ENCB_MR 46
 #define PWM_MR 6
-#define IN2_MR 49
-#define IN1_MR 50
+#define IN2_MR 50
+#define IN1_MR 49
 
 // back right motor
 #define ENCA_BR 21 // Interrupt pin
 #define ENCB_BR 45
 #define PWM_BR 11
-#define IN2_BR 38
-#define IN1_BR 39
+#define IN2_BR 39
+#define IN1_BR 38
 
 
 //Define servos
