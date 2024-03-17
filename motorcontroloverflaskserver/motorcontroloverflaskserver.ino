@@ -10,6 +10,11 @@
 
 //Define servos
 Servo servo_fl;
+Servo servo_ml;
+Servo servo_bl;
+Servo servo_fr;
+Servo servo_mr;
+Servo servo_br;
 
 
 volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
@@ -28,6 +33,14 @@ void setup() {
   pinMode(IN2, OUTPUT);
   
 servo_fl.attach(31);
+servo_ml.attach(33);
+servo_bl.attach(32);
+servo_fr.attach(28);
+servo_mr.attach(29);
+servo_br.attach(30);
+
+
+
   Serial.println("target pos");
 }
 
@@ -79,17 +92,35 @@ void stopMotor() {
 }
 
 void turnRight() {
-servo_fl.write(180);
+servo_fl.write(120);
+servo_ml.write(120);
+servo_bl.write(120);
+servo_fr.write(120);
+servo_mr.write(120);
+servo_br.write(120);
+
+
+
 delay(15);
 }
 
 void turnLeft() {
-servo_fl.write(0);
+servo_fl.write(60);
+servo_ml.write(60);
+servo_bl.write(60);
+servo_fr.write(60);
+servo_mr.write(60);
+servo_br.write(60);
 delay(15);
 }
 
 void center() {
 servo_fl.write(90);
+servo_ml.write(90);
+servo_bl.write(90);
+servo_fr.write(90);
+servo_mr.write(90);
+servo_br.write(90);
 delay(15);
 }
 

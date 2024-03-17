@@ -6,7 +6,7 @@ import serial
 app = Flask(__name__)
  
 # Define the serial port and baud rate
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM1', 9600)
 
 # Function to send command to Arduino
 def send_command(command):
