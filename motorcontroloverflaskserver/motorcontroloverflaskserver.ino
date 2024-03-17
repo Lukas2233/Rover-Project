@@ -144,6 +144,15 @@ void loop() {
     else if (incomingByte == 'j') {
       turnLeft();
     }
+
+    else if (incomingByte == 'r') {
+      diagonalRight();
+    }
+
+    else if (incomingByte == 'f') {
+      diagonalLeft();
+    }
+
     // If the incoming byte is 'k', center
     else if (incomingByte == 'k') {
       center();
@@ -181,20 +190,17 @@ void stopMotor() {
   setMotor(0, 0, PWM_BR, IN1_BR, IN2_BR);
 }
 
-void turnRight() {
+void diagonalRight() {
 servo_fl.write(120);
 servo_ml.write(120);
 servo_bl.write(120);
 servo_fr.write(120);
 servo_mr.write(120);
 servo_br.write(120);
-
-
-
 delay(15);
 }
 
-void turnLeft() {
+void diagonalLeft() {
 servo_fl.write(60);
 servo_ml.write(60);
 servo_bl.write(60);
@@ -203,6 +209,27 @@ servo_mr.write(60);
 servo_br.write(60);
 delay(15);
 }
+
+void turnRight() {
+servo_fl.write(120);
+servo_ml.write(90);
+servo_bl.write(60);
+servo_fr.write(120);
+servo_mr.write(90);
+servo_br.write(60);
+delay(15);
+}
+
+void turnLeft() {
+servo_fl.write(60);
+servo_ml.write(90);
+servo_bl.write(120);
+servo_fr.write(60);
+servo_mr.write(90);
+servo_br.write(120);
+delay(15);
+}
+
 
 void center() {
 servo_fl.write(90);
