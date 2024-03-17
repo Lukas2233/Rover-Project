@@ -2,10 +2,10 @@
 #include <Servo.h>
 
 #define ENCA 2 // YELLOW
-#define ENCB 3 // GREEN
-#define PWM 8
-#define IN2 24
-#define IN1 22
+#define ENCB 51 // GREEN
+#define PWM 10
+#define IN2 40
+#define IN1 41
 
 Servo servo1;
 
@@ -25,7 +25,7 @@ void setup() {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   
- servo1.attach(36);
+ servo1.attach(31);
 
   Serial.println("target pos");
 }
