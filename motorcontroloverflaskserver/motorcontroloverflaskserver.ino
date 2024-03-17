@@ -210,7 +210,7 @@ servo_br.write(60);
 delay(15);
 }
 
-void turnRight() {
+void turnLeft() {
 servo_fl.write(120);
 servo_ml.write(90);
 servo_bl.write(60);
@@ -220,7 +220,7 @@ servo_br.write(60);
 delay(15);
 }
 
-void turnLeft() {
+void turnRight() {
 servo_fl.write(60);
 servo_ml.write(90);
 servo_bl.write(120);
