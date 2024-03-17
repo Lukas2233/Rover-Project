@@ -1,12 +1,19 @@
 #include <util/atomic.h> // For the ATOMIC_BLOCK macro
 #include <Servo.h>
 
-//front left motor
-#define ENCA 2 // YELLOW
-#define ENCB 51 // GREEN
-#define PWM 10
-#define IN2 40
-#define IN1 41
+// Front left motor
+#define ENCA_FL 2 // Interrupt pin
+#define ENCB_FL 51
+#define PWM_FL 10
+#define IN2_FL 40
+#define IN1_FL 41
+
+// Middle left motor
+#define ENCA_ML 20 // Interrupt pin
+#define ENCB_ML 23
+#define PWM_ML 8
+#define IN2_ML 53
+#define IN1_ML 52
 
 //Define servos
 Servo servo_fl;
@@ -24,13 +31,19 @@ float eintegral = 0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(ENCA, INPUT);
-  pinMode(ENCB, INPUT);
-  attachInterrupt(digitalPinToInterrupt(ENCA), readEncoder, RISING);
+  pinMode(ENCA_FL, INPUT);
+  pinMode(ENCB_FL, INPUT);
   
-  pinMode(PWM, OUTPUT);
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
+  pinMode(PWM_FL, OUTPUT);
+  pinMode(IN1_FL, OUTPUT);
+  pinMode(IN2_FL, OUTPUT);
+  
+  pinMode(ENCA_ML, INPUT);
+  pinMode(ENCB_ML, INPUT);
+
+  pinMode(PWM_ML, OUTPUT);
+  pinMode(IN1_ML, OUTPUT);
+  pinMode(IN2_ML, OUTPUT);
   
 servo_fl.attach(31);
 servo_ml.attach(33);
@@ -77,18 +90,21 @@ void loop() {
 }
 
 void clockwise() {
-  // Set motor direction clockwise
-  setMotor(1, 255, PWM, IN1, IN2);
+  // Set motor direction clockwise for front left and middle left motors
+  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(1, 255, PWM_ML, IN1_ML, IN2_ML);
 }
 
 void counterClockwise() {
   // Run the motor counter-clockwise
-  setMotor(-1, 255, PWM, IN1, IN2);
+  setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(-1, 255, PWM_ML, IN1_ML, IN2_ML);
 }
 
 void stopMotor() {
   // Stop the motor
-  setMotor(0, 0, PWM, IN1, IN2);
+  setMotor(0, 0, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(0, 0, PWM_ML, IN1_ML, IN2_ML);
 }
 
 void turnRight() {
@@ -138,11 +154,4 @@ void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
   }  
 }
 
-void readEncoder() {
-  int b = digitalRead(ENCB);
-  if (b > 0) {
-    posi++;
-  } else {
-    posi--;
-  }
-}
+
