@@ -1,5 +1,9 @@
 #include <util/atomic.h> // For the ATOMIC_BLOCK macro
 #include <Servo.h>
+#include <Wire.h>
+#define SLAVE_ADDRESS 0x04
+
+char incomingByte;
 
 // front left motor
 #define ENCA_FL 2 // Interrupt pin
@@ -53,6 +57,7 @@ Servo servo_mr;
 Servo servo_br;
 
 
+//I THINK I CAN REMOVE THESE LINES HERE
 volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
 long prevT = 0;
 float eprev = 0;
@@ -60,6 +65,8 @@ float eintegral = 0;
 
 void setup() {
   Serial.begin(9600);
+  Wire.begin(SLAVE_ADDRESS);
+  Wire.onReceive(receiveData);
 
   //set up for front left
   pinMode(ENCA_FL, INPUT);
@@ -120,42 +127,45 @@ servo_br.attach(30);
 }
 
 void loop() {
-  // Check if there's serial data available
-  if (Serial.available() > 0) {
-    // Read the incoming byte
-    char incomingByte = Serial.read();
-    // If the incoming byte is 'w', run the motor clockwise
-    if (incomingByte == 'w') {
-      clockwise();
-    }
-    // If the incoming byte is 's', run the motor counter-clockwise
-    else if (incomingByte == 's') {
-      counterClockwise();
-    }
-    // If the incoming byte is 'h', stop the motor
-    else if (incomingByte == 'h') {
-      stopMotor();
-    }
-    // If the incoming byte is 'd', turn right 45 degrees
-    else if (incomingByte == 'l') {
-      turnRight();
-    }
-    // If the incoming byte is 'j', turn left 45 degrees
-    else if (incomingByte == 'j') {
-      turnLeft();
-    }
+}
 
-    else if (incomingByte == 'r') {
-      diagonalRight();
-    }
+void receiveData(int byteCount) {
+  while (Wire.available()) {
+    incomingByte = Wire.read();
 
-    else if (incomingByte == 'f') {
-      diagonalLeft();
-    }
-
-    // If the incoming byte is 'k', center
-    else if (incomingByte == 'k') {
-      center();
+    // Print the received character to the Serial Monitor
+    Serial.print("Received character: ");
+    Serial.println(incomingByte);
+    
+    // Process the incoming byte
+    switch (incomingByte) {
+      case 'w':
+        clockwise();
+        break;
+      case 's':
+        counterClockwise();
+        break;
+      case 'h':
+        stopMotor();
+        break;
+      case 'l':
+        turnRight();
+        break;
+      case 'j':
+        turnLeft();
+        break;
+      case 'r':
+        diagonalRight();
+        break;
+      case 'f':
+        diagonalLeft();
+        break;
+      case 'k':
+        center();
+        break;
+      default:
+        // Handle unknown command or do nothing
+        break;
     }
   }
 }
