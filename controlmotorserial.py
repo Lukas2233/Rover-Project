@@ -6,7 +6,7 @@ import time
 
 app = Flask(__name__)
  
-# Raspberry Pi Zero W's I2C bus
+# Raspberry Pi Zero W's I2C bus number
 bus = smbus.SMBus(1)
 
 # Arduino Mega's I2C address

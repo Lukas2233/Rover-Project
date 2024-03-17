@@ -1,9 +1,6 @@
-#include <util/atomic.h> // For the ATOMIC_BLOCK macro
+//include libraries
+//#include <util/atomic.h> I think this was just needed for when I use itterupts. Since I'm not using them right now I think I can omit.
 #include <Servo.h>
-#include <Wire.h>
-#define SLAVE_ADDRESS 0x08
-
-char incomingByte;
 
 // front left motor
 #define ENCA_FL 2 // Interrupt pin
@@ -47,7 +44,6 @@ char incomingByte;
 #define IN2_BR 39
 #define IN1_BR 38
 
-
 //Define servos
 Servo servo_fl;
 Servo servo_ml;
@@ -56,19 +52,10 @@ Servo servo_fr;
 Servo servo_mr;
 Servo servo_br;
 
-
-//I THINK I CAN REMOVE THESE LINES HERE
-volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
-long prevT = 0;
-float eprev = 0;
-float eintegral = 0;
-
 void setup() {
   Serial.begin(9600);
-  Wire.begin(SLAVE_ADDRESS);
-  Wire.onReceive(receiveData);
 
-  //set up for front left
+//set up for front left
   pinMode(ENCA_FL, INPUT);
   pinMode(ENCB_FL, INPUT);
   pinMode(PWM_FL, OUTPUT);
@@ -103,75 +90,62 @@ void setup() {
   pinMode(IN1_MR, OUTPUT);
   pinMode(IN2_MR, OUTPUT);
 
-  //set up for back right
+//set up for back right
   pinMode(ENCA_BR, INPUT);
   pinMode(ENCB_BR, INPUT);
   pinMode(PWM_BR, OUTPUT);
   pinMode(IN1_BR, OUTPUT);
   pinMode(IN2_BR, OUTPUT);
 
-
-
-
 //setup for servos
-servo_fl.attach(31);
-servo_ml.attach(33);
-servo_bl.attach(32);
-servo_fr.attach(28);
-servo_mr.attach(29);
-servo_br.attach(30);
-
-
-
-  Serial.println("target pos");
+  servo_fl.attach(31);
+  servo_ml.attach(33);
+  servo_bl.attach(32);
+  servo_fr.attach(28);
+  servo_mr.attach(29);
+  servo_br.attach(30);
 }
 
 void loop() {
-}
+  // Check if there's serial data available
+  if (Serial.available() > 0) {
 
-void receiveData(int byteCount) {
-  while (Wire.available()) {
-    incomingByte = Wire.read();
+    // Read the incoming byte
+    char incomingByte = Serial.read();
 
-    // Print the received character to the Serial Monitor
-    Serial.print("Received character: ");
-    Serial.println(incomingByte);
-    
-    // Process the incoming byte
-    switch (incomingByte) {
-      case 'w':
-        clockwise();
-        break;
-      case 's':
-        counterClockwise();
-        break;
-      case 'h':
-        stopMotor();
-        break;
-      case 'l':
-        turnRight();
-        break;
-      case 'j':
-        turnLeft();
-        break;
-      case 'r':
-        diagonalRight();
-        break;
-      case 'f':
-        diagonalLeft();
-        break;
-      case 'k':
-        center();
-        break;
-      default:
-        // Handle unknown command or do nothing
-        break;
+    // Handle all incomming commands and map them to a function
+      if (incomingByte == 'w') {
+      clockwise();
+    }
+    else if (incomingByte == 's') {
+      counterClockwise();
+    }
+    else if (incomingByte == 'h') {
+      stopMotor();
+    }
+    else if (incomingByte == 'l') {
+      turnRight();
+    }
+    else if (incomingByte == 'j') {
+      turnLeft();
+    }
+    else if (incomingByte == 'r') {
+      diagonalRight();
+    }
+    else if (incomingByte == 'f') {
+      diagonalLeft();
+    }
+    else if (incomingByte == 'k') {
+      center();
     }
   }
 }
 
+
+// define the functions for the motors
+
+// moves rover forward
 void clockwise() {
-  // Set motor direction clockwise for front left and middle left motors
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(1, 255, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
@@ -180,8 +154,8 @@ void clockwise() {
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
 }
 
+// moves rover in reverse
 void counterClockwise() {
-  // Run the motor counter-clockwise
   setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(-1, 255, PWM_ML, IN1_ML, IN2_ML);
   setMotor(-1, 255, PWM_BL, IN1_BL, IN2_BL);
@@ -191,7 +165,6 @@ void counterClockwise() {
 }
 
 void stopMotor() {
-  // Stop the motor
   setMotor(0, 0, PWM_FL, IN1_FL, IN2_FL);
   setMotor(0, 0, PWM_ML, IN1_ML, IN2_ML);
   setMotor(0, 0, PWM_BL, IN1_BL, IN2_BL);
@@ -200,55 +173,56 @@ void stopMotor() {
   setMotor(0, 0, PWM_BR, IN1_BR, IN2_BR);
 }
 
+// define the functions for the servos
+
 void diagonalRight() {
-servo_fl.write(120);
-servo_ml.write(120);
-servo_bl.write(120);
-servo_fr.write(120);
-servo_mr.write(120);
-servo_br.write(120);
-delay(15);
+  servo_fl.write(120);
+  servo_ml.write(120);
+  servo_bl.write(120);
+  servo_fr.write(120);
+  servo_mr.write(120);
+  servo_br.write(120);
+  delay(15);
 }
 
 void diagonalLeft() {
-servo_fl.write(60);
-servo_ml.write(60);
-servo_bl.write(60);
-servo_fr.write(60);
-servo_mr.write(60);
-servo_br.write(60);
-delay(15);
-}
-
-void turnLeft() {
-servo_fl.write(120);
-servo_ml.write(90);
-servo_bl.write(60);
-servo_fr.write(120);
-servo_mr.write(90);
-servo_br.write(60);
-delay(15);
+  servo_fl.write(60);
+  servo_ml.write(60);
+  servo_bl.write(60);
+  servo_fr.write(60);
+  servo_mr.write(60);
+  servo_br.write(60);
+  delay(15);
 }
 
 void turnRight() {
-servo_fl.write(60);
-servo_ml.write(90);
-servo_bl.write(120);
-servo_fr.write(60);
-servo_mr.write(90);
-servo_br.write(120);
-delay(15);
+  servo_fl.write(120);
+  servo_ml.write(90);
+  servo_bl.write(60);
+  servo_fr.write(120);
+  servo_mr.write(90);
+  servo_br.write(60);
+  delay(15);
 }
 
+void turnLeft() {
+  servo_fl.write(60);
+  servo_ml.write(90);
+  servo_bl.write(120);
+  servo_fr.write(60);
+  servo_mr.write(90);
+  servo_br.write(120);
+  delay(15);
+}
 
 void center() {
-servo_fl.write(90);
-servo_ml.write(90);
-servo_bl.write(90);
-servo_fr.write(90);
-servo_mr.write(90);
-servo_br.write(90);
-delay(15);
+  servo_fl.write(90);
+  servo_ml.write(90);
+  servo_bl.write(90);
+  servo_fr.write(90);
+  servo_mr.write(90);
+  servo_br.write(90);
+  delay(15);
 }
 
 void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
@@ -264,5 +238,3 @@ void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
     digitalWrite(in2, LOW);
   }  
 }
-
-
