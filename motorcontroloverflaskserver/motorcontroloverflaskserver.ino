@@ -1,19 +1,48 @@
 #include <util/atomic.h> // For the ATOMIC_BLOCK macro
 #include <Servo.h>
 
-// Front left motor
+// front left motor
 #define ENCA_FL 2 // Interrupt pin
 #define ENCB_FL 51
 #define PWM_FL 10
 #define IN2_FL 40
 #define IN1_FL 41
 
-// Middle left motor
+// middle left motor
 #define ENCA_ML 20 // Interrupt pin
 #define ENCB_ML 23
 #define PWM_ML 8
 #define IN2_ML 53
 #define IN1_ML 52
+
+// back left motor
+#define ENCA_BL 19 // Interrupt pin
+#define ENCB_BL 47
+#define PWM_BL 12
+#define IN2_BL 36
+#define IN1_BL 37
+
+// front right motor
+#define ENCA_FR 3 // Interrupt pin
+#define ENCB_FR 48
+#define PWM_FR 9
+#define IN2_FR 43
+#define IN1_FR 42
+
+// middle right motor
+#define ENCA_MR 18 // Interrupt pin
+#define ENCB_MR 46
+#define PWM_MR 6
+#define IN2_MR 49
+#define IN1_MR 50
+
+// back right motor
+#define ENCA_BR 21 // Interrupt pin
+#define ENCB_BR 45
+#define PWM_BR 11
+#define IN2_BR 38
+#define IN1_BR 39
+
 
 //Define servos
 Servo servo_fl;
@@ -31,20 +60,53 @@ float eintegral = 0;
 
 void setup() {
   Serial.begin(9600);
+
+  //set up for front left
   pinMode(ENCA_FL, INPUT);
   pinMode(ENCB_FL, INPUT);
-  
   pinMode(PWM_FL, OUTPUT);
   pinMode(IN1_FL, OUTPUT);
   pinMode(IN2_FL, OUTPUT);
   
+//set up for middle left
   pinMode(ENCA_ML, INPUT);
   pinMode(ENCB_ML, INPUT);
-
   pinMode(PWM_ML, OUTPUT);
   pinMode(IN1_ML, OUTPUT);
   pinMode(IN2_ML, OUTPUT);
-  
+
+//set up for back left
+  pinMode(ENCA_BL, INPUT);
+  pinMode(ENCB_BL, INPUT);
+  pinMode(PWM_BL, OUTPUT);
+  pinMode(IN1_BL, OUTPUT);
+  pinMode(IN2_BL, OUTPUT);
+
+//set up for front right
+  pinMode(ENCA_FR, INPUT);
+  pinMode(ENCB_FR, INPUT);
+  pinMode(PWM_FR, OUTPUT);
+  pinMode(IN1_FR, OUTPUT);
+  pinMode(IN2_FR, OUTPUT);
+
+//set up for middle right
+  pinMode(ENCA_MR, INPUT);
+  pinMode(ENCB_MR, INPUT);
+  pinMode(PWM_MR, OUTPUT);
+  pinMode(IN1_MR, OUTPUT);
+  pinMode(IN2_MR, OUTPUT);
+
+  //set up for back right
+  pinMode(ENCA_BR, INPUT);
+  pinMode(ENCB_BR, INPUT);
+  pinMode(PWM_BR, OUTPUT);
+  pinMode(IN1_BR, OUTPUT);
+  pinMode(IN2_BR, OUTPUT);
+
+
+
+
+//setup for servos
 servo_fl.attach(31);
 servo_ml.attach(33);
 servo_bl.attach(32);
@@ -93,18 +155,30 @@ void clockwise() {
   // Set motor direction clockwise for front left and middle left motors
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(1, 255, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(1, 255, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
 }
 
 void counterClockwise() {
   // Run the motor counter-clockwise
   setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(-1, 255, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(-1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(-1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(-1, 255, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(-1, 255, PWM_BR, IN1_BR, IN2_BR);
 }
 
 void stopMotor() {
   // Stop the motor
   setMotor(0, 0, PWM_FL, IN1_FL, IN2_FL);
   setMotor(0, 0, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(0, 0, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(0, 0, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(0, 0, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(0, 0, PWM_BR, IN1_BR, IN2_BR);
 }
 
 void turnRight() {
