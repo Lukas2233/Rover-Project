@@ -1,7 +1,7 @@
 #include <util/atomic.h> // For the ATOMIC_BLOCK macro
 #include <Servo.h>
 #include <Wire.h>
-#define SLAVE_ADDRESS 0x04
+#define SLAVE_ADDRESS 0x08
 
 char incomingByte;
 

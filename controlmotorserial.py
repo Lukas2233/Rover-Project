@@ -10,7 +10,7 @@ app = Flask(__name__)
 bus = smbus.SMBus(1)
 
 # Arduino Mega's I2C address
-ARDUINO_ADDRESS = 0x04
+ARDUINO_ADDRESS = 0x08
 
 # Function to send command to Arduino
 def send_data(data):
