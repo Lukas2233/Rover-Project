@@ -111,16 +111,13 @@ void setup() {
   pinMode(IN2_BR, OUTPUT);
 
 
-
-
-//setup for servos
-servo_fl.attach(31);
-servo_ml.attach(33);
-servo_bl.attach(32);
-servo_fr.attach(28);
-servo_mr.attach(29);
-servo_br.attach(30);
-
+  //setup for servos
+  servo_fl.attach(31);
+  servo_ml.attach(33);
+  servo_bl.attach(32);
+  servo_fr.attach(28);
+  servo_mr.attach(29);
+  servo_br.attach(30);
 
 
   Serial.println("target pos");
@@ -140,19 +137,19 @@ void receiveData(int byteCount) {
     // Process the incoming byte
     switch (incomingByte) {
       case 'w':
-        clockwise();
+        forward();
         break;
       case 's':
-        counterClockwise();
+        reverse();
         break;
       case 'h':
         stopMotor();
         break;
       case 'l':
-        turnRight();
+        bigRight();
         break;
       case 'j':
-        turnLeft();
+        bigLeft();
         break;
       case 'r':
         diagonalRight();
@@ -163,15 +160,35 @@ void receiveData(int byteCount) {
       case 'k':
         center();
         break;
+      case 'q':
+        rotateleft();
+        break;
+      case 'e':
+        rotateright();
+        break;
+      case 'a':
+        crableft();
+        break;
+      case 'd':
+        crabright();
+        break;
+      case 'u':
+        smallLeft();
+        break;
+      case 'o':
+        smallRight();
+        break;
+
       default:
-        // Handle unknown command or do nothing
+        stopMotor();
+        center();
         break;
     }
   }
 }
 
-void clockwise() {
-  // Set motor direction clockwise for front left and middle left motors
+void forward() {
+  // Run the motor clockwise
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(1, 255, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
@@ -180,7 +197,7 @@ void clockwise() {
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
 }
 
-void counterClockwise() {
+void reverse() {
   // Run the motor counter-clockwise
   setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(-1, 255, PWM_ML, IN1_ML, IN2_ML);
@@ -201,55 +218,156 @@ void stopMotor() {
 }
 
 void diagonalRight() {
-servo_fl.write(120);
-servo_ml.write(120);
-servo_bl.write(120);
-servo_fr.write(120);
-servo_mr.write(120);
-servo_br.write(120);
-delay(15);
+  servo_fl.write(120);
+  servo_ml.write(120);
+  servo_bl.write(120);
+  servo_fr.write(120);
+  servo_mr.write(120);
+  servo_br.write(120);
+
+  delay(15);
 }
 
 void diagonalLeft() {
-servo_fl.write(60);
-servo_ml.write(60);
-servo_bl.write(60);
-servo_fr.write(60);
-servo_mr.write(60);
-servo_br.write(60);
-delay(15);
+  servo_fl.write(60);
+  servo_ml.write(60);
+  servo_bl.write(60);
+  servo_fr.write(60);
+  servo_mr.write(60);
+  servo_br.write(60);
+
+  delay(15);
 }
 
-void turnRight() {
-servo_fl.write(120);
-servo_ml.write(90);
-servo_bl.write(60);
-servo_fr.write(120);
-servo_mr.write(90);
-servo_br.write(60);
-delay(15);
+void bigRight() {
+  servo_fl.write(120);
+  servo_ml.write(90);
+  servo_bl.write(60);
+  servo_fr.write(120);
+  servo_mr.write(90);
+  servo_br.write(60);
+
+  delay(15);
 }
 
-void turnLeft() {
-servo_fl.write(60);
-servo_ml.write(90);
-servo_bl.write(120);
-servo_fr.write(60);
-servo_mr.write(90);
-servo_br.write(120);
-delay(15);
+void smallRight() {
+  servo_fl.write(100);
+  servo_ml.write(90);
+  servo_bl.write(80);
+  servo_fr.write(100);
+  servo_mr.write(90);
+  servo_br.write(80);
+
+  delay(15);
+}
+
+void bigLeft() {
+  servo_fl.write(60);
+  servo_ml.write(90);
+  servo_bl.write(120);
+  servo_fr.write(60);
+  servo_mr.write(90);
+  servo_br.write(120);
+
+  delay(15);
+}
+
+void smallLeft() {
+  servo_fl.write(80);
+  servo_ml.write(90);
+  servo_bl.write(100);
+  servo_fr.write(80);
+  servo_mr.write(90);
+  servo_br.write(100);
+
+  delay(15);
 }
 
 
 void center() {
-servo_fl.write(90);
-servo_ml.write(90);
-servo_bl.write(90);
-servo_fr.write(90);
-servo_mr.write(90);
-servo_br.write(90);
-delay(15);
+  servo_fl.write(90);
+  servo_ml.write(90);
+  servo_bl.write(90);
+  servo_fr.write(90);
+  servo_mr.write(90);
+  servo_br.write(90);
+
+  delay(15);
 }
+
+void rotateright() {
+  servo_fl.write(160);
+  servo_ml.write(90);
+  servo_bl.write(20);
+  servo_fr.write(160);
+  servo_mr.write(90);
+  servo_br.write(20);
+
+  delay(15);
+
+  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(-1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+}
+
+void rotateleft() {
+  servo_fl.write(20);
+  servo_ml.write(90);
+  servo_bl.write(160);
+  servo_fr.write(20);
+  servo_mr.write(90);
+  servo_br.write(160);
+
+  delay(15);
+
+  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(-1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+}
+
+void crabright() {
+  servo_fl.write(180);
+  servo_ml.write(180);
+  servo_bl.write(180);
+  servo_fr.write(180);
+  servo_mr.write(180);
+  servo_br.write(180);
+
+  delay(15);
+
+  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+}
+
+void crableft() {
+  servo_fl.write(0);
+  servo_ml.write(0);
+  servo_bl.write(0);
+  servo_fr.write(0);
+  servo_mr.write(0);
+  servo_br.write(0);
+
+  delay(15);
+
+  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+}
+
+
 
 void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
   analogWrite(pwm, pwmVal);
