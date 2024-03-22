@@ -56,6 +56,18 @@ Servo servo_fr;
 Servo servo_mr;
 Servo servo_br;
 
+//define servo offset values
+int fr_ofst = 12; 
+int mr_ofst = 5;
+int br_ofst = 0;
+int fl_ofst = -7;
+int ml_ofst = 2;
+int bl_ofst = -5;
+
+
+//define servo starting position
+int start_angle = 90;
+
 
 //I THINK I CAN REMOVE THESE LINES HERE
 volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
@@ -64,7 +76,6 @@ float eprev = 0;
 float eintegral = 0;
 
 void setup() {
-  Serial.begin(9600);
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
@@ -119,8 +130,14 @@ void setup() {
   servo_mr.attach(29);
   servo_br.attach(30);
 
+  servo_fl.write(start_angle+fl_ofst);
+  servo_ml.write(start_angle+ml_ofst);
+  servo_bl.write(start_angle+bl_ofst);
+  servo_fr.write(start_angle+fr_ofst);
+  servo_mr.write(start_angle+mr_ofst);
+  servo_br.write(start_angle+br_ofst);
 
-  Serial.println("target pos");
+
 }
 
 void loop() {
@@ -130,10 +147,6 @@ void receiveData(int byteCount) {
   while (Wire.available()) {
     incomingByte = Wire.read();
 
-    // Print the received character to the Serial Monitor
-    Serial.print("Received character: ");
-    Serial.println(incomingByte);
-    
     // Process the incoming byte
     switch (incomingByte) {
       case 'w':
@@ -180,8 +193,6 @@ void receiveData(int byteCount) {
         break;
 
       default:
-        stopMotor();
-        center();
         break;
     }
   }
@@ -218,90 +229,90 @@ void stopMotor() {
 }
 
 void diagonalRight() {
-  servo_fl.write(120);
-  servo_ml.write(120);
-  servo_bl.write(120);
-  servo_fr.write(120);
-  servo_mr.write(120);
-  servo_br.write(120);
+  servo_fl.write(120 + fl_ofst);
+  servo_ml.write(120 + ml_ofst);
+  servo_bl.write(120 + bl_ofst);
+  servo_fr.write(120 + fr_ofst);
+  servo_mr.write(120 + mr_ofst);
+  servo_br.write(120 + br_ofst);
 
   delay(15);
 }
 
 void diagonalLeft() {
-  servo_fl.write(60);
-  servo_ml.write(60);
-  servo_bl.write(60);
-  servo_fr.write(60);
-  servo_mr.write(60);
-  servo_br.write(60);
+  servo_fl.write(60 + fl_ofst);
+  servo_ml.write(60 + ml_ofst);
+  servo_bl.write(60 + bl_ofst);
+  servo_fr.write(60 + fr_ofst);
+  servo_mr.write(60 + mr_ofst);
+  servo_br.write(60 + br_ofst);
 
   delay(15);
 }
 
 void bigRight() {
-  servo_fl.write(120);
-  servo_ml.write(90);
-  servo_bl.write(60);
-  servo_fr.write(120);
-  servo_mr.write(90);
-  servo_br.write(60);
+  servo_fl.write(120 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(60 + bl_ofst);
+  servo_fr.write(120 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(60 + br_ofst);
 
   delay(15);
 }
 
 void smallRight() {
-  servo_fl.write(100);
-  servo_ml.write(90);
-  servo_bl.write(80);
-  servo_fr.write(100);
-  servo_mr.write(90);
-  servo_br.write(80);
+  servo_fl.write(110 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(70 + bl_ofst);
+  servo_fr.write(110 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(70 + br_ofst);
 
   delay(15);
 }
 
 void bigLeft() {
-  servo_fl.write(60);
-  servo_ml.write(90);
-  servo_bl.write(120);
-  servo_fr.write(60);
-  servo_mr.write(90);
-  servo_br.write(120);
+  servo_fl.write(60 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(120 + bl_ofst);
+  servo_fr.write(60 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(120 + br_ofst);
 
   delay(15);
 }
 
 void smallLeft() {
-  servo_fl.write(80);
-  servo_ml.write(90);
-  servo_bl.write(100);
-  servo_fr.write(80);
-  servo_mr.write(90);
-  servo_br.write(100);
+  servo_fl.write(70 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(110 + bl_ofst);
+  servo_fr.write(70 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(110 + br_ofst);
 
   delay(15);
 }
 
 
 void center() {
-  servo_fl.write(90);
-  servo_ml.write(90);
-  servo_bl.write(90);
-  servo_fr.write(90);
-  servo_mr.write(90);
-  servo_br.write(90);
+  servo_fl.write(90+fl_ofst);
+  servo_ml.write(90+ml_ofst);
+  servo_bl.write(90+bl_ofst);
+  servo_fr.write(90+fr_ofst);
+  servo_mr.write(90+mr_ofst);
+  servo_br.write(90+br_ofst);
 
   delay(15);
 }
 
 void rotateright() {
-  servo_fl.write(160);
-  servo_ml.write(90);
-  servo_bl.write(20);
-  servo_fr.write(160);
-  servo_mr.write(90);
-  servo_br.write(20);
+  servo_fl.write(160 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(20 + bl_ofst);
+  servo_fr.write(160 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(20 + br_ofst);
 
   delay(15);
 
@@ -314,12 +325,12 @@ void rotateright() {
 }
 
 void rotateleft() {
-  servo_fl.write(20);
-  servo_ml.write(90);
-  servo_bl.write(160);
-  servo_fr.write(20);
-  servo_mr.write(90);
-  servo_br.write(160);
+  servo_fl.write(20 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(160 + bl_ofst);
+  servo_fr.write(20 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(160 + br_ofst);
 
   delay(15);
 
@@ -332,39 +343,41 @@ void rotateleft() {
 }
 
 void crabright() {
-  servo_fl.write(180);
-  servo_ml.write(180);
-  servo_bl.write(180);
-  servo_fr.write(180);
-  servo_mr.write(180);
-  servo_br.write(180);
-
-  delay(15);
-
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
   setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
   setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+
+  delay(100);
+  
+  servo_fl.write(180 + fl_ofst);
+  servo_ml.write(180 + ml_ofst);
+  servo_bl.write(180 + bl_ofst);
+  servo_fr.write(180 + fr_ofst);
+  servo_mr.write(180 + mr_ofst);
+  servo_br.write(180 + br_ofst);
+
+
 }
 
 void crableft() {
-  servo_fl.write(0);
-  servo_ml.write(0);
-  servo_bl.write(0);
-  servo_fr.write(0);
-  servo_mr.write(0);
-  servo_br.write(0);
-
-  delay(15);
-
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
   setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
   setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
   setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+
+  delay(100);
+
+  servo_fl.write(0 + fl_ofst);
+  servo_ml.write(0 + ml_ofst);
+  servo_bl.write(0 + bl_ofst);
+  servo_fr.write(0 + fr_ofst);
+  servo_mr.write(0 + mr_ofst);
+  servo_br.write(0 + br_ofst);
 }
 
 
