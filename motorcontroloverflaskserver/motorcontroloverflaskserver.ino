@@ -173,6 +173,9 @@ void receiveData(int byteCount) {
       case 'k':
         center();
         break;
+      case 'i':
+        center();
+        break;        
       case 'q':
         rotateleft();
         break;
