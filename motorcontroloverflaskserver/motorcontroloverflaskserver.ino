@@ -57,10 +57,10 @@ Servo servo_mr;
 Servo servo_br;
 
 //define servo offset values
-int fr_ofst = 12; 
-int mr_ofst = 5;
-int br_ofst = 0;
-int fl_ofst = -7;
+int fr_ofst = 5; 
+int mr_ofst = 4;
+int br_ofst = -1;
+int fl_ofst = -9;
 int ml_ofst = 2;
 int bl_ofst = -5;
 
@@ -313,24 +313,6 @@ void rotateright() {
   servo_fl.write(160 + fl_ofst);
   servo_ml.write(90 + ml_ofst);
   servo_bl.write(20 + bl_ofst);
-  servo_fr.write(160 + fr_ofst);
-  servo_mr.write(90 + mr_ofst);
-  servo_br.write(20 + br_ofst);
-
-  delay(15);
-
-  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
-  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
-  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
-  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
-  setMotor(-1, 127, PWM_MR, IN1_MR, IN2_MR);
-  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
-}
-
-void rotateleft() {
-  servo_fl.write(20 + fl_ofst);
-  servo_ml.write(90 + ml_ofst);
-  servo_bl.write(160 + bl_ofst);
   servo_fr.write(20 + fr_ofst);
   servo_mr.write(90 + mr_ofst);
   servo_br.write(160 + br_ofst);
@@ -338,8 +320,26 @@ void rotateleft() {
   delay(15);
 
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
-  setMotor(-1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(-1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(-1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(-1, 255, PWM_BR, IN1_BR, IN2_BR);
+}
+
+void rotateleft() {
+  servo_fl.write(160 + fl_ofst);
+  servo_ml.write(90 + ml_ofst);
+  servo_bl.write(20 + bl_ofst);
+  servo_fr.write(20 + fr_ofst);
+  servo_mr.write(90 + mr_ofst);
+  servo_br.write(160 + br_ofst);
+
+  delay(15);
+
+  setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(-1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(-1, 255, PWM_BL, IN1_BL, IN2_BL);
   setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
   setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
