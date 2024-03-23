@@ -346,31 +346,31 @@ void rotateleft() {
 }
 
 void crabright() {
-  setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
-  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
-  setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
-  setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
-  setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
-  setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
+  setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
+  setMotor(-1, 255, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(-1, 255, PWM_BL, IN1_BL, IN2_BL);
+  setMotor(-1, 255, PWM_FR, IN1_FR, IN2_FR);
+  setMotor(-1, 255, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(-1, 255, PWM_BR, IN1_BR, IN2_BR);
 
   delay(100);
   
-  servo_fl.write(180 + fl_ofst);
-  servo_ml.write(180 + ml_ofst);
-  servo_bl.write(180 + bl_ofst);
-  servo_fr.write(180 + fr_ofst);
-  servo_mr.write(180 + mr_ofst);
-  servo_br.write(180 + br_ofst);
+  servo_fl.write(0 + fl_ofst);
+  servo_ml.write(0 + ml_ofst);
+  servo_bl.write(0 + bl_ofst);
+  servo_fr.write(0 + fr_ofst);
+  servo_mr.write(0 + mr_ofst);
+  servo_br.write(0 + br_ofst);
 
 
 }
 
 void crableft() {
   setMotor(1, 255, PWM_FL, IN1_FL, IN2_FL);
-  setMotor(1, 127, PWM_ML, IN1_ML, IN2_ML);
+  setMotor(1, 255, PWM_ML, IN1_ML, IN2_ML);
   setMotor(1, 255, PWM_BL, IN1_BL, IN2_BL);
   setMotor(1, 255, PWM_FR, IN1_FR, IN2_FR);
-  setMotor(1, 127, PWM_MR, IN1_MR, IN2_MR);
+  setMotor(1, 255, PWM_MR, IN1_MR, IN2_MR);
   setMotor(1, 255, PWM_BR, IN1_BR, IN2_BR);
 
   delay(100);
